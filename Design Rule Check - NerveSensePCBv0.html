@@ -1,0 +1,392 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD26\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2/17/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11:12:43 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc">C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">16</td></tr>
+</table>
+</td>
+</table><a name="IDVS1TIRQUCLEUFH4DDGSGK5XSVOZ2NUDFUHWSZBBS4EAWOLZ212C"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2Q231HRWOASAHEFVYJBHWP5KKGKNPN0HD5Z2BWC1P0IHLYOOYISE">Clearance Constraint (Gap=10mil) (All),(All)</a></td>
+<td class="column2">7</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSNRXBBDYX0RVFTUBDEZLJMD0GGFEQUQXL2MQJYD3U1TSVMNUCHRC">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4LBTVNQRCU1NLZGSGWMQTTESKIYFOLPJIOLCIMBFENHTR1ICNVWP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDBH2MFZG0NBYIUWRKZIX15SDFLBSTCW3CPW1FNZKZIXCW1YPPMD">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAHHLCHOYAVNVNEFZI2XEXEGX3CHNM0TR41OT1ZLN02QDZRIG11T">Width Constraint (Min=8mil) (Max=10mil) (Preferred=8mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCFQ1AAOXBDCKIQABR2XBNSOAQHEW0DED4Q2GSSEQ3OPZDLF3QIKD">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPFOG2NBWQHORKGIGP0RMUY5XQGRILC2BAIN321O43FI4FKMQFB4K">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOX5RJ450IMF0CR2RNG03DOM4POKFZ3UCISA0OMGZ40MUPBPDZLPM">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQRAMNLWNPVCJHV2NYXZDIGRDWJWLM1KWPWVNRIHRZZUIWBFO54GK">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0R3RZBKGWLQILDBCKG4G1JN3DKN0JEZ0ZQUQYBCIPSFL0V1Y013M">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">7</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4D3C0KJCMJHSLKNBYSY0TRKR3LHIQ5D5DAORFLKEGS4AWT11SUQC">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0TVRV0DGWUCZHJ3LTW4EZV2BVLCWJF4PHSOBRVHUIOZGLHCS3PVH">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDODS4NMSI22RSGDMX5IZQDZE43PGENQO5W10DMMGBTATBK0C2ZHID">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDB52OPO5HXMGTIY2WU2TMQACVYCGVPO3PRYMY0ABZRFQEKKAVTPOD">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">16</td>
+</tr>
+</table><br><a name="ID2Q231HRWOASAHEFVYJBHWP5KKGKNPN0HD5Z2BWC1P0IHLYOOYISE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2511.515mil|Location2.X=2522.765mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2511.515mil|Location2.X=2522.765mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True">Clearance Constraint: (6.083mil &lt; 10mil) Between Pad C2 - 10 nF-1(2510mil,3326.981mil) on Top Layer And Pad C2 - 10 nF-2(2510mil,3303.019mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3734.966mil|Location2.Y=3746.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3734.966mil|Location2.Y=3746.216mil|Absolute=True">Clearance Constraint: (7.874mil &lt; 10mil) Between Pad U?-1(2418.386mil,3753.386mil) on Top Layer And Pad U?-2(2418.386mil,3727.795mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True">Clearance Constraint: (7.874mil &lt; 10mil) Between Pad U?-2(2418.386mil,3727.795mil) on Top Layer And Pad U?-3(2418.386mil,3702.205mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3683.785mil|Location2.Y=3695.035mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3683.785mil|Location2.Y=3695.035mil|Absolute=True">Clearance Constraint: (7.874mil &lt; 10mil) Between Pad U?-3(2418.386mil,3702.205mil) on Top Layer And Pad U?-4(2418.386mil,3676.614mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3683.785mil|Location2.Y=3695.035mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3683.785mil|Location2.Y=3695.035mil|Absolute=True">Clearance Constraint: (7.874mil &lt; 10mil) Between Pad U?-5(2591.614mil,3676.614mil) on Top Layer And Pad U?-6(2591.614mil,3702.205mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True">Clearance Constraint: (7.874mil &lt; 10mil) Between Pad U?-6(2591.614mil,3702.205mil) on Top Layer And Pad U?-7(2591.614mil,3727.795mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3734.966mil|Location2.Y=3746.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3734.966mil|Location2.Y=3746.216mil|Absolute=True">Clearance Constraint: (7.874mil &lt; 10mil) Between Pad U?-7(2591.614mil,3727.795mil) on Top Layer And Pad U?-8(2591.614mil,3753.386mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4LBTVNQRCU1NLZGSGWMQTTESKIYFOLPJIOLCIMBFENHTR1ICNVWP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.775mil|Location2.X=2691.614mil|Location1.Y=3386.614mil|Location2.Y=3802.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.775mil|Location2.X=2691.614mil|Location1.Y=3386.614mil|Location2.Y=3802.205mil|Absolute=True">Un-Routed Net Constraint: Net NetC1 - 0.1 uF_1 Between Track (2219.161mil,3485mil)(2220.775mil,3486.614mil) on Top Layer And Pad U?-6(2591.614mil,3702.205mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID0R3RZBKGWLQILDBCKG4G1JN3DKN0JEZ0ZQUQYBCIPSFL0V1Y013M"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2497.235mil|Location2.X=2508.485mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2497.235mil|Location2.X=2508.485mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6.083mil &lt; 10mil) Between Pad C2 - 10 nF-1(2510mil,3326.981mil) on Top Layer And Pad C2 - 10 nF-2(2510mil,3303.019mil) on Top Layer [Top Solder] Mask Sliver [6.083mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3734.965mil|Location2.Y=3746.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3734.965mil|Location2.Y=3746.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U?-1(2418.386mil,3753.386mil) on Top Layer And Pad U?-2(2418.386mil,3727.795mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U?-2(2418.386mil,3727.795mil) on Top Layer And Pad U?-3(2418.386mil,3702.205mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3683.784mil|Location2.Y=3695.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2384.218mil|Location2.X=2395.468mil|Location1.Y=3683.784mil|Location2.Y=3695.034mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U?-3(2418.386mil,3702.205mil) on Top Layer And Pad U?-4(2418.386mil,3676.614mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3683.784mil|Location2.Y=3695.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3683.784mil|Location2.Y=3695.034mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U?-5(2591.614mil,3676.614mil) on Top Layer And Pad U?-6(2591.614mil,3702.205mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3709.375mil|Location2.Y=3720.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U?-6(2591.614mil,3702.205mil) on Top Layer And Pad U?-7(2591.614mil,3727.795mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3734.965mil|Location2.Y=3746.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.446mil|Location2.X=2568.696mil|Location1.Y=3734.965mil|Location2.Y=3746.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U?-7(2591.614mil,3727.795mil) on Top Layer And Pad U?-8(2591.614mil,3753.386mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4D3C0KJCMJHSLKNBYSY0TRKR3LHIQ5D5DAORFLKEGS4AWT11SUQC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2380.773mil|Location2.X=2392.023mil|Location1.Y=3756.619mil|Location2.Y=3767.869mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\PCB_Project\NerveSensePCBv0.2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2380.773mil|Location2.X=2392.023mil|Location1.Y=3756.619mil|Location2.Y=3767.869mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.89mil &lt; 10mil) Between Arc (2373.11mil,3762.244mil) on Top Overlay And Pad U?-1(2418.386mil,3753.386mil) on Top Layer [Top Overlay] to [Top Solder] clearance [6.89mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
