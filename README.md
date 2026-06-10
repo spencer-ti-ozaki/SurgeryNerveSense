@@ -61,6 +61,8 @@ When the nerve fires, it produces a CAP — an AC electrical response with a pea
 
 Because 100mV is too weak for the Pico's ADC to read directly, the signal passes through an **AD620 instrumentation amplifier module** at a gain of 100×. A custom PCB with an INA333 amplifier and bandpass filter was also designed (using Altium Designer) to isolate the nerve's 20Hz signal — see `/PCB` for design files.
 
+> **PCB Note:** The custom INA333 PCB is a more robust alternative to the AD620 module due to its integrated bandpass filter, which actively filters out non-nerve frequencies and reduces noise. However, if using the PCB, the RG resistor should be swapped to a **1000 Ω resistor** to set the correct gain for this application. Additionally, the PCB in its present state includes **no voltage protection** — adding a clamping circuit or protection resistors before any further use is strongly recommended.
+
 The electrodes are made from **silver wire coated in AgCl** (via reaction with bleach) to minimize capacitive interference — bare stainless steel was found to convert the tissue analogue into a capacitor, skewing readings.
 
 ### 3. Calculating
