@@ -22,7 +22,7 @@
 Connect the scalpel probe, electrodes, amplifier module, and LCD to the control unit. Ensure the AgCl electrode wires are properly coated — re-coat in bleach solution if the coating has degraded (dark tarnish indicates active coating; silver/bare wire indicates it needs re-coating). Keep electrodes away from direct sunlight, which degrades the AgCl coating.
 
 ### Step 2 — Place the grounding electrode
-Attach the grounding TENS pad flat against the skin directly over the surgical site. This prevents charge from building up in the tissue during stimulation.
+Attach the grounding electrode flat against the skin directly over the surgical site. This prevents charge from building up in the tissue during stimulation.
 
 ### Step 3 — Place the reference electrode
 If available, place the reference electrode (S−) at the far end of the surgical site, well away from the intended incision point. This gives the amplifier a stable baseline to measure against.
