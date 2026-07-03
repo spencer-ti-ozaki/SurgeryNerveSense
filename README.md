@@ -2,7 +2,18 @@
 
 **NerveSense** is a surgical proximity device designed to help surgeons detect and avoid peripheral nerves during incision. It estimates the distance between a surgical probe and a nearby nerve in real time, displaying the result on an LCD screen.
 
-> **Disclaimer:** NerveSense is a proof-of-concept prototype developed as a university engineering project. It is not approved for clinical use.
+> **Disclaimer:** NerveSense is a proof-of-concept prototype developed as a university engineering project. It is not approved for clinical use, and has only ever been tested on a tissue phantom with a controlled nerve analog — never on a live nerve or living tissue. See [TESTING.md](TESTING.md).
+
+### Documentation
+
+| File | What's in it |
+|------|--------------|
+| **README.md** | Overview, subsystems, hardware (this file) |
+| [THEORY.md](THEORY.md) | Operating principle & the physics of the distance estimate |
+| [TESTING.md](TESTING.md) | **How it was validated** — nerve analog, tissue phantoms, data, results, scope |
+| [RESEARCH.md](RESEARCH.md) | Open questions & next experiments (for collaborators / follow-on work) |
+| [USAGE.md](USAGE.md) | Step-by-step operating instructions |
+| [WIRING.md](WIRING.md) | Full wiring reference and pinout |
 
 ---
 
@@ -57,7 +68,7 @@ A **grounding electrode** was added to the signaling unit to prevent charge buil
 
 ### 2. Receiving
 
-When the nerve fires, it produces a CAP — an AC electrical response with a peak voltage of ~100mV. The **scalpel probe (S+)** and a **reference electrode (S-)** measure the voltage difference in the tissue at the surgical site.
+When a stimulated nerve fires, it produces a CAP — an AC electrical response with a peak voltage of ~100mV — that spreads outward through the surrounding tissue (volume conduction). The **scalpel probe (S+)** and a **reference electrode (S-)** measure the resulting voltage difference at the surgical site; the closer the probe is to the nerve, the larger the reading. (In bench testing this firing nerve was replaced by a controlled **nerve analog** — see [TESTING.md](TESTING.md) — and the physics of why amplitude encodes distance is in [THEORY.md](THEORY.md).)
 
 Because 100mV is too weak for the Pico's ADC to read directly, the signal passes through an **AD620 instrumentation amplifier module** at a gain of 100×. A custom PCB with an INA333 amplifier and bandpass filter was also designed (using Altium Designer) to isolate the nerve's 20Hz signal — see `/PCB` for design files.
 
@@ -69,14 +80,16 @@ The electrodes are made from **silver wire coated in AgCl** (via reaction with b
 
 The Raspberry Pi Pico reads ADC samples every millisecond and computes:
 
-- **`baseline`** — average voltage during the first 0.25s (calibration period at startup)
-- **`avg_diff_volts`** — average voltage deviation from baseline over the last 250ms window
+- **`baseline`** — mean ADC reading captured at startup, with the device at rest (calibration period)
+- **`avg_diff_volts`** — average voltage deviation from baseline over each 250ms window
 
 Distance is estimated using an empirically derived exponential curve fitted to 10 data points (R² = 0.9321):
 
 ```
 d = 20 × e^(−7.21 × avg_diff_volts)
 ```
+
+The constants were fit on a tissue phantom; a separate physics-first (analytical) derivation gives the same exponential *shape* — both are documented in [THEORY.md](THEORY.md), and the calibration data behind them in [TESTING.md](TESTING.md).
 
 **Proximity thresholds used for display warnings:**
 
@@ -94,6 +107,23 @@ A **20×4 I2C LCD** shows:
 - **Row 2:** Distance in cm
 - **Row 3:** Current voltage reading
 - **Row 4:** Delta voltage (`avg_diff_volts`)
+
+---
+
+## Validation Summary
+
+NerveSense was characterized on a **tissue phantom** (chicken breast, and agar/saline
+gel) with a **nerve analog** (a copper wire driven at 110 mV / 20 Hz pulsed DC to
+mimic a real ~100 mV CAP). It has **not** been tested on a live nerve.
+
+| Metric | Result |
+|--------|--------|
+| Detection range | ~5 cm from the nerve analog |
+| Distance accuracy | ±0.5 cm (0–5 cm range) |
+| Empirical fit | R² = 0.9321 (10 calibration points) |
+| Reliability | ~10% of samples show voltage spikes |
+
+Full methodology, scope, and what this does/doesn't prove: **[TESTING.md](TESTING.md)**.
 
 ---
 
@@ -120,8 +150,12 @@ SurgeryNerveSense/
 ├── CAD/              # STEP files for the scalpel probe, frame, lid, and enclosure
 ├── PCB/              # PCB design files (Altium), DWG, and design rule check
 ├── Code/             # MicroPython firmware for the Raspberry Pi Pico
-├── README.md         # This file
-└── USAGE.md          # Step-by-step operating instructions
+├── README.md         # This file — overview
+├── THEORY.md         # Operating principle & physics
+├── TESTING.md        # Validation methodology, data, and results
+├── RESEARCH.md       # Open questions & next experiments
+├── USAGE.md          # Step-by-step operating instructions
+└── WIRING.md         # Wiring reference and pinout
 ```
 
 ---
@@ -137,6 +171,10 @@ SurgeryNerveSense/
 - Replace AD620 with INA333 + proper bandpass filter PCB
 - Add voltage protection and emergency shut-off
 - Improve UI for clinical accessibility
+
+For the bigger research questions (testing on a real nerve, lock-in detection for
+selectivity, calibration transfer) and proposed next experiments, see
+**[RESEARCH.md](RESEARCH.md)**.
 
 ---
 
