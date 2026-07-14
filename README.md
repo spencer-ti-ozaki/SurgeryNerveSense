@@ -1,6 +1,6 @@
 # NerveSense
 
-**NerveSense** is a surgical proximity device designed to help surgeons detect and avoid peripheral nerves during incision. It estimates the distance between a surgical probe and a nearby nerve in real time, displaying the result on an LCD screen.
+**NerveSense** is a surgical proximity device designed to help surgeons detect and avoid peripheral nerves during incision. It estimates the distance between a surgical probe and a nearby nerve in real time, displaying the result on an LCD screen. Link for demo video: https://youtu.be/kSlPQVkup6I
 
 > **Disclaimer:** NerveSense is a proof-of-concept prototype developed as a university engineering project. It is not approved for clinical use, and has only ever been tested on a tissue phantom with a controlled nerve analog — never on a live nerve or living tissue. See [TESTING.md](TESTING.md).
 
